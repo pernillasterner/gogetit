@@ -5,8 +5,6 @@ import "./globals.css";
 const urbanist = Urbanist({
   variable: "--font-urbanist",
   subsets: ["latin"],
-  // weight: ["400", "500", "600", "700"],
-  // display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,14 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Det alla sidor har gemensamt
-    /** Next.js inte behöver återrendera header/footer när användaren klickar mellan /dashboard och /profile. */
     <html lang="sv" data-scroll-behavior="smooth" className={urbanist.variable}>
-      <body className="flex flex-col min-h-screen">
-        <header>HEADER</header>
-        {children}
-        <footer>FOOTER</footer>
-      </body>
+      <body className="flex flex-col min-h-screen">{children}</body>
     </html>
   );
 }
