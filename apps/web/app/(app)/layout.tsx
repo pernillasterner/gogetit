@@ -1,9 +1,19 @@
-import AppHeader from "../../components/app/Header";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import AppHeader from "@/components/app/Header";
 
-// Logged in user
-export default function AppLayout({ children }: { children: React.ReactNode }) {
-  // const session = await getSession(); // Supabase-koll
-  // if (!session) redirect("/auth/login");
+// Inloggad användare
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/auth/login");
 
   return (
     <>
