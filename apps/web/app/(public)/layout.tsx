@@ -1,5 +1,5 @@
-import PublicFooter from "../../components/public/Footer";
-import PublicHeader from "../../components/public/Header";
+import PublicFooter from "@/components/public/Footer";
+import PublicHeader from "@/components/public/Header";
 
 // utloggade
 export default function PublicLayout({
