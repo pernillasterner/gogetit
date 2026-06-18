@@ -30,8 +30,8 @@
    ========================================================= */
 
 :root {
-  --background: #efefef;
-  --foreground: #212121;
+  --color-background: var(--color-cream-beige);
+  --color-foreground: var(--color-eerie-black);
 
   /* Layout */
   --page-max: 108rem; /* 1728px */
@@ -63,6 +63,18 @@
 
   /* Radius */
   --ggi-radius: 2.5rem; /* 40px */
+}
+
+[data-text-size="large"] {
+  --ggi-body: 1.25rem;
+  --ggi-h1: 2.5rem;
+  --ggi-h2: 2rem;
+  --ggi-h3: 1.75rem;
+}
+
+[data-contrast="high"] {
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -140,11 +152,45 @@
     font-weight: 400;
     line-height: var(--lh-body);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Synlig fokusindikator — kritiskt för tangentbordsnavigering */
+  :focus-visible {
+    outline: 2px solid var(--color-eerie-black);
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .imgDark {
@@ -163,3 +209,8 @@ a {
     display: unset;
   }
 } */
+
+input {
+  background: white;
+  padding: 10px;
+}

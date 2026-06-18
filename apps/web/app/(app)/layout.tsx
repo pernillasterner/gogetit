@@ -1,13 +1,27 @@
-// Kräver inloggning, har egen nav och sidmeny
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import AppHeader from "@/components/app/Header";
 
-// export default async function AppLayout({ children }) {
-//   const session = await getSession(); // Supabase-koll
-//   if (!session) redirect("/auth/login");
+// Inloggad användare
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-//   return (
-//     <>
-//       <DashboardNav />
-//       {children}
-//     </>
-//   );
-// }
+  if (!user) redirect("/auth/login");
+
+  return (
+    <>
+      {/* <DashboardNav /> */}
+      <AppHeader />
+      <main className="flex-1 grid grid-cols-[240px_1fr] gap-6 p-8">
+        {children}
+      </main>
+    </>
+  );
+}
